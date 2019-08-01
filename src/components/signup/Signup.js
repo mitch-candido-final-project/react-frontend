@@ -30,57 +30,60 @@ export default class User extends Component {
     this.service
       .signup(username, password, firstName, lastName, email)
       .then(() => {
-        this.props.history.push("/home");
+        console.log("singup");
+        this.props.getUser();
       });
   };
 
   render() {
     return (
-      <form className="signup-form" onSubmit={this.tryToSignUp}>
-        <h3>Sign Up:</h3>
-        <div className="full-name">
-          <div className="first-name">
-            <legend>First Name:</legend>
-            <input
-              type="text"
-              value={this.state.firstName}
-              onChange={this.handleChange}
-              name="firstName"
-            />
+      <div className="sign-up">
+        <form className="signup-form" onSubmit={this.tryToSignUp}>
+          <h3>Sign Up:</h3>
+          <div className="full-name">
+            <div className="first-name">
+              <legend>First Name:</legend>
+              <input
+                type="text"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+                name="firstName"
+              />
+            </div>
+            <div className="last-name">
+              <legend>Last Name</legend>
+              <input
+                type="text"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+                name="lastName"
+              />
+            </div>
           </div>
-          <div className="last-name">
-            <legend>Last Name</legend>
-            <input
-              type="text"
-              value={this.state.lastName}
-              onChange={this.handleChange}
-              name="lastName"
-            />
-          </div>
-        </div>
-        <legend>Email:</legend>
-        <input
-          type="text"
-          value={this.state.email}
-          onChange={this.handleChange}
-          name="email"
-        />
-        <legend>Username:</legend>
-        <input
-          type="text"
-          value={this.state.userName}
-          onChange={this.handleChange}
-          name="userName"
-        />
-        <legend>Password:</legend>
-        <input
-          type="text"
-          value={this.state.password}
-          onChange={this.handleChange}
-          name="password"
-        />
-        <button className="waves-effect waves-light btn-large">Submit</button>
-      </form>
+          <legend>Email:</legend>
+          <input
+            type="text"
+            value={this.state.email}
+            onChange={this.handleChange}
+            name="email"
+          />
+          <legend>Username:</legend>
+          <input
+            type="text"
+            value={this.state.userName}
+            onChange={this.handleChange}
+            name="userName"
+          />
+          <legend>Password:</legend>
+          <input
+            type="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
+          />
+          <button className="waves-effect waves-light btn-large">Submit</button>
+        </form>
+      </div>
     );
   }
 }

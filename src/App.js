@@ -4,7 +4,7 @@ import Signup from "./components/signup/Signup";
 import AuthService from "./components/services/AuthService.js";
 import DashBoard from "./components/dashboard/Dashboard";
 import { Route, Link, Switch } from "react-router-dom";
-import Login from "./components/login/Login";
+import LoginModal from "./components/login/LoginModal";
 import "./App.css";
 
 export default class App extends Component {
@@ -16,36 +16,56 @@ export default class App extends Component {
     this.service = new AuthService();
   }
 
-  // getCurrentlyLoggedInUser = () => {
-  //   this.service
-  //     .currentUser()
-  //     .then(user => {
-  //       this.setState({ currentlyLoggedIn: user });
-  //     })
-  //     .catch(() => {
-  //       this.setState({ currentlyLoggedIn: null });
-  //     });
-  // };
+  getCurrentlyLoggedInUser = () => {
+    this.service
+      .currentUser()
+      .then(user => {
+        this.setState({ currentlyLoggedIn: user });
+        console.log("current user", this.state.currentlyLoggedIn);
+      })
+      .catch(() => {
+        this.setState({ currentlyLoggedIn: null });
+      });
+  };
 
-  // componentDidMount() {
-  //   this.getCurrentlyLoggedInUser();
-  // }
+  componentDidMount() {
+    this.getCurrentlyLoggedInUser();
+  }
+
+  logoutCall = () => {
+    this.service.logout().then(() => {
+      console.log("call from nav logout");
+      this.setState({ currentlyLoggedIn: null });
+    });
+  };
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <Nav
-            logout={() => this.service.logout()}
+            logout={this.logoutCall}
             getUser={this.getCurrentlyLoggedInUser}
           />
-          <div className="sign-up">
-            <Route exact path="/" component={Signup} />
-          </div>
-          <Route exact path="/" component={Login} />
           <Switch>
-            <Route exact path="/home" component={DashBoard} />
+            <Route
+              exact
+              path="/"
+              render={props =>
+                !this.state.currentlyLoggedIn ? (
+                  <Signup {...props} getUser={this.getCurrentlyLoggedInUser} />
+                ) : (
+                  <DashBoard />
+                )
+              }
+            />
           </Switch>
+          <Route
+            path="/"
+            render={props => (
+              <LoginModal {...props} getUser={this.getCurrentlyLoggedInUser} />
+            )}
+          />
         </header>
       </div>
     );

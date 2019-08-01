@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "../services/AuthService";
 
-export default class Login extends Component {
+export default class LoginModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +18,9 @@ export default class Login extends Component {
     const password = this.state.password;
 
     this.service.login(username, password).then(() => {
-      this.props.history.push("/home");
+      this.props.history.push("/");
+      this.props.getUser();
       //TODO: get the current user need to change the login component to render
-      console.log("worked");
     });
   };
 
@@ -38,11 +38,13 @@ export default class Login extends Component {
               value={this.state.username}
               name="username"
               onChange={this.handleChange}
+              type="text"
             />
             <legend>Password:</legend>
             <input
               value={this.state.password}
               name="password"
+              type="password"
               onChange={this.handleChange}
             />
             <button className="btn modal-close waves-effect waves-green">
