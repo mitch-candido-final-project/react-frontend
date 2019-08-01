@@ -43,10 +43,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Nav
-            logout={this.logoutCall}
-            getUser={this.getCurrentlyLoggedInUser}
-          />
+          <Nav logout={this.logoutCall} user={this.state.currentlyLoggedIn} />
           <Switch>
             <Route
               exact

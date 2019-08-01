@@ -6,15 +6,35 @@ export default function Nav(props) {
 
   return (
     <div className="nav">
-      <ul>
-        <button data-target="modal1" className="btn modal-trigger">
-          Login
-        </button>
-
-        <button className="btn" onClick={props.logout}>
-          Logout
-        </button>
-      </ul>
+      {!props.user ? (
+        <div className="logged-out-nav">
+          <a data-target="modal1" className="btn modal-trigger">
+            About
+          </a>
+          <a data-target="modal1" className="btn modal-trigger">
+            Login
+          </a>
+        </div>
+      ) : (
+        <div className="loged-in-nav">
+          <div className="left-side">
+            <a className="btn" onClick={props.logout}>
+              Dashboard
+            </a>
+            <a className="btn" onClick={props.logout}>
+              News Feed
+            </a>
+          </div>
+          <div className="right-side">
+            <a className="btn" onClick={props.logout}>
+              Account
+            </a>
+            <a className="btn" onClick={props.logout}>
+              Logout
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
