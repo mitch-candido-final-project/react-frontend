@@ -1,0 +1,5 @@
+.task-container {
+  background-color: #282d39;
+  grid-area: task;
+  border-radius: 5px;
+}
