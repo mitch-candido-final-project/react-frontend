@@ -1,23 +1,36 @@
 import React, { Component } from "react";
+import { Route, Link, Switch } from "react-router-dom";
+
+//services
+import AuthService from "./components/services/AuthService.js";
+import ProjectService from "./components/services/ProjectService.js";
+
+//components:
 import Nav from "./components/navbar/Nav";
 import Signup from "./components/signup/Signup";
-import AuthService from "./components/services/AuthService.js";
-import DashBoard from "./components/dashboard/Dashboard";
-import { Route, Link, Switch } from "react-router-dom";
 import LoginModal from "./components/login/LoginModal";
+import DashBoard from "./components/dashboard/Dashboard";
+//projects
+import NewProject from "./components/projects/NewProject";
+import ProjectDetails from "./components/projects/ProjectDetails";
+import AllProjects from "./components/projects/allProjects/AllProjects.js";
+
+//misc
 import "./App.css";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentlyLoggedIn: null
+      currentlyLoggedIn: null,
+      allProjects: []
     };
-    this.service = new AuthService();
+    this.authService = new AuthService();
+    this.projectService = new ProjectService();
   }
 
   getCurrentlyLoggedInUser = () => {
-    this.service
+    this.authService
       .currentUser()
       .then(user => {
         this.setState({ currentlyLoggedIn: user });
@@ -28,12 +41,25 @@ export default class App extends Component {
       });
   };
 
+  getAllProjects = () => {
+    this.projectService
+      .getAllProjects()
+      .then(response => {
+        console.log(response);
+        this.setState({ allProjects: [...response] });
+      })
+      .catch(() => {
+        this.setState({ allProjects: [] });
+      });
+  };
+
   componentDidMount() {
     this.getCurrentlyLoggedInUser();
+    this.getAllProjects();
   }
 
   logoutCall = () => {
-    this.service.logout().then(() => {
+    this.authService.logout().then(() => {
       console.log("call from nav logout");
       this.setState({ currentlyLoggedIn: null });
     });
@@ -55,6 +81,14 @@ export default class App extends Component {
                   <DashBoard />
                 )
               }
+            />
+            <Route exact path="/new-project" component={NewProject} />
+            <Route
+              exact
+              path="/all-projects"
+              render={props => (
+                <AllProjects {...props} allProjects={this.state.allProjects} />
+              )}
             />
           </Switch>
           <Route
