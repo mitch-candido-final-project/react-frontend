@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-  var elems = document.querySelectorAll(".modal");
-  //TODO: WTF IS THIS SHIT
-  // eslint-disable-next-line no-undef
-  var instances = M.Modal.init(elems, {});
+  var getModal = document.querySelectorAll(".modal");
+  var instances = M.Modal.init(getModal, {});
 });
+
+// function dropDownInit() {
+//   var getDropdown = document.querySelectorAll(".select");
+//   var dropdowns = M.FormSelect.init(getDropdown, {});
+// }

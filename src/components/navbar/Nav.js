@@ -6,6 +6,7 @@ export default function Nav(props) {
 
   return (
     <div className="nav">
+      <h3>PROLO</h3>
       {!props.user ? (
         <div className="logged-out-nav">
           <a data-target="modal1" className="btn modal-trigger">
