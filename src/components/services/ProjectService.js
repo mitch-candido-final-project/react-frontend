@@ -11,21 +11,19 @@ class ProjectService {
   }
 
   addProject = info => {
-    return this.service.post(
-      "/new-project",
-      {
-        name: info.name,
-        description: info.description,
-        startDate: info.startDate,
-        dueDate: info.dueDate,
-        timeSpent: 0,
-        complete: false,
-        isPublic: info.isPublic,
-        image: info.image
-      },
-      { withCredentials: true }
-    );
+    return this.service.post("/new-project", info, { withCredentials: true });
   };
+
+  // {
+  //   name: info.name,
+  //   description: info.description,
+  //   startDate: info.startDate,
+  //   dueDate: info.dueDate,
+  //   timeSpent: 0,
+  //   complete: false,
+  //   isPublic: info.isPublic,
+  //   image: info.image
+  // }
 
   projectDetails = id => {
     return this.service.get("/details/" + id).then(response => response.data);

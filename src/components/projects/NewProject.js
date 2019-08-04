@@ -17,8 +17,12 @@ class NewProject extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    const data = new FormData();
+    for (let key in this.state) {
+      data.append(key, this.state[key]);
+    }
     this.service
-      .addProject({ ...this.state })
+      .addProject(data)
       .then(() => {
         this.setState({
           name: "",
@@ -40,11 +44,21 @@ class NewProject extends Component {
   handleChangeCheckbox = event => {
     this.setState({ [event.target.name]: event.target.checked });
   };
+  handleChangeFile = event => {
+    console.log(event.target.files[0]);
+    this.setState({ [event.target.name]: event.target.files[0] });
+  };
 
   render() {
     return (
+      // <div className="add-project container" id="add-project-modal" className="modal">
       <div className="add-project container">
-        <form onSubmit={this.handleFormSubmit}>
+        <form
+          onSubmit={this.handleFormSubmit}
+          method="POST"
+          encType="multipart/form-data"
+        >
+          {/* <div className="modal-content"> */}
           <label>Name:</label>
           <input
             type="text"
@@ -61,13 +75,13 @@ class NewProject extends Component {
           <label>start Date:</label>
           <input
             type="date"
-            name="startsDate"
+            name="startDate"
             value={this.state.startsDate}
             onChange={e => this.handleChange(e)}
           />
           <label>Due Date:</label>
           <input
-            type="text"
+            type="date"
             name="dueDate"
             value={this.state.dueDate}
             onChange={e => this.handleChange(e)}
@@ -82,9 +96,32 @@ class NewProject extends Component {
             />
             <span>Public?:</span>
           </label>
-          <input type="file" name="image" />
+          {/* <div className="file-field input-field">
+            <div className="btn grey">
+              <span>Image</span>
+              <input type="file" name="image" on />
+            </div>
+            <div className="file-path-wrapper">
+              <input name="image" className="file-path validate" type="text" />
+            </div>
+          </div> */}
+          <input
+            type="file"
+            name="image"
+            onChange={e => this.handleChangeFile(e)}
+          />
 
-          <input type="submit" value="Submit" />
+          <input
+            className="waves-effect waves-light btn"
+            type="submit"
+            value="Submit"
+          />
+          {/* </div> */}
+          {/* <div className=“modal-footer”>
+           <a href=“#!” className=“modal-close waves-effect waves-green”>
+             close
+           </a>
+         </div> */}
         </form>
       </div>
     );
