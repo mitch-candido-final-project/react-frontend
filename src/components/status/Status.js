@@ -15,7 +15,7 @@ export default class Status extends Component {
           <div className="clock-in">
             <div className="clock-in-button">
               <button>
-                <i class="fas fa-stopwatch" />
+                <i className="fas fa-stopwatch" />
               </button>
             </div>
             <div className="clock-in-label">

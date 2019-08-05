@@ -45,7 +45,6 @@ class NewProject extends Component {
     this.setState({ [event.target.name]: event.target.checked });
   };
   handleChangeFile = event => {
-    console.log(event.target.files[0]);
     this.setState({ [event.target.name]: event.target.files[0] });
   };
 
