@@ -17,8 +17,12 @@ class NewProject extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    const data = new FormData();
+    for (let key in this.state) {
+      data.append(key, this.state[key]);
+    }
     this.service
-      .addProject({ ...this.state })
+      .addProject(data)
       .then(() => {
         this.setState({
           name: "",
@@ -39,6 +43,9 @@ class NewProject extends Component {
 
   handleChangeCheckbox = event => {
     this.setState({ [event.target.name]: event.target.checked });
+  };
+  handleChangeFile = event => {
+    this.setState({ [event.target.name]: event.target.files[0] });
   };
 
   render() {
@@ -83,7 +90,11 @@ class NewProject extends Component {
               />
               <span>Public?:</span>
             </label>
-            <input type="file" name="image" />
+            <input
+              type="file"
+              name="image"
+              onChange={e => this.handleChangeFile(e)}
+            />
             <input type="submit" value="Submit" />
           </div>
           <div className="modal-footer">
