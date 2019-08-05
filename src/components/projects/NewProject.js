@@ -43,48 +43,54 @@ class NewProject extends Component {
 
   render() {
     return (
-      <div className="add-project container">
+      <div id="add-project-modal" className="modal add-project">
         <form onSubmit={this.handleFormSubmit}>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={e => this.handleChange(e)}
-          />
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={this.state.description}
-            onChange={e => this.handleChange(e)}
-          />
-          <label>start Date:</label>
-          <input
-            type="date"
-            name="startsDate"
-            value={this.state.startsDate}
-            onChange={e => this.handleChange(e)}
-          />
-          <label>Due Date:</label>
-          <input
-            type="text"
-            name="dueDate"
-            value={this.state.dueDate}
-            onChange={e => this.handleChange(e)}
-          />
-          <label>
+          <div className="modal-content">
+            <label>Name:</label>
             <input
-              type="checkbox"
-              name="isPublic"
-              onChange={e => this.handleChangeCheckbox(e)}
-              checked={this.state.isPublic && "checked"}
-              style={{ position: "initial" }}
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={e => this.handleChange(e)}
             />
-            <span>Public?:</span>
-          </label>
-          <input type="file" name="image" />
-
-          <input type="submit" value="Submit" />
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={this.state.description}
+              onChange={e => this.handleChange(e)}
+            />
+            <label>start Date:</label>
+            <input
+              type="date"
+              name="startsDate"
+              value={this.state.startsDate}
+              onChange={e => this.handleChange(e)}
+            />
+            <label>Due Date:</label>
+            <input
+              type="text"
+              name="dueDate"
+              value={this.state.dueDate}
+              onChange={e => this.handleChange(e)}
+            />
+            <label>
+              <input
+                type="checkbox"
+                name="isPublic"
+                onChange={e => this.handleChangeCheckbox(e)}
+                checked={this.state.isPublic && "checked"}
+                style={{ position: "initial" }}
+              />
+              <span>Public?:</span>
+            </label>
+            <input type="file" name="image" />
+            <input type="submit" value="Submit" />
+          </div>
+          <div className="modal-footer">
+            <a href="#!" className="modal-close waves-effect waves-green">
+              close
+            </a>
+          </div>
         </form>
       </div>
     );
