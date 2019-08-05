@@ -1,0 +1,8 @@
+.project-single-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #7882a2;
+}
