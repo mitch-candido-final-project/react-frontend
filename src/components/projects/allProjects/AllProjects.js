@@ -1,17 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./project-row.css";
 
-function AllProjects(props) {
-  const getAllProjects = () => {
-    return props.allProjects.map(eachProject => {
-      console.log(eachProject.name);
+export default class AllProjects extends Component {
+  getAllProjects = () => {
+    const onclickFunctions = id => {
+      this.props.toggleProjectView();
+      this.props.saveProjectIdToState(id);
+    };
+
+    return this.props.allProjects.map(eachProject => {
       return (
-        <div key={eachProject._id}>
-          <h2> {eachProject.name}</h2>
+        <div key={eachProject._id} className="project-single-row">
+          <button
+            // to={`/details/${eachProject._id}`}
+            onClick={() => onclickFunctions(eachProject._id)}
+          >
+            {eachProject.name}
+          </button>
+          <span>{eachProject.startDate}</span>
+          <span>{eachProject.dueDate}</span>
+          <span>{eachProject.isPublic}</span>
         </div>
       );
     });
   };
-  return <div>{getAllProjects()}</div>;
+  render() {
+    return <div>{this.getAllProjects()}</div>;
+  }
 }
-
-export default AllProjects;

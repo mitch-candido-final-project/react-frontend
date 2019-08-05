@@ -19,15 +19,15 @@ export default function Nav(props) {
       ) : (
         <div className="loged-in-nav">
           <div className="left-side">
-            <a className="btn" onClick={props.logout}>
+            <Link to={"/"} className="btn">
               Dashboard
-            </a>
+            </Link>
             <a className="btn" onClick={props.logout}>
               News Feed
             </a>
           </div>
           <div className="right-side">
-            <a className="btn" onClick={props.logout}>
+            <a className="btn" onClick={props.toggleAccountView}>
               Account
             </a>
             <a className="btn" onClick={props.logout}>

@@ -1,0 +1,34 @@
+.project-container {
+  background-color: #282d39;
+  grid-area: project;
+  border-radius: 5px;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #7882a2;
+  padding: 10px;
+  color: #fff;
+}
+
+.project-header i {
+  color: #39b6ff;
+  transition: all 0.2s ease-in-out;
+}
+
+.project-header i:hover {
+  color: #d46b35;
+}
+
+.project-header button {
+  background: transparent;
+  border: none;
+}
+.project-header button:hover {
+  cursor: pointer;
+}
+.project-header h5 {
+  margin: 0;
+}

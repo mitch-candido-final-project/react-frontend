@@ -12,7 +12,6 @@ import LoginModal from "./components/login/LoginModal";
 import DashBoard from "./components/dashboard/Dashboard";
 //projects
 import NewProject from "./components/projects/NewProject";
-import ProjectDetails from "./components/projects/ProjectDetails";
 import AllProjects from "./components/projects/allProjects/AllProjects.js";
 
 //misc
@@ -23,11 +22,17 @@ export default class App extends Component {
     super(props);
     this.state = {
       currentlyLoggedIn: null,
-      allProjects: []
+      allProjects: [],
+      accountLinkClicked: false
     };
     this.authService = new AuthService();
     this.projectService = new ProjectService();
   }
+
+  toggleUserAccountView = () => {
+    console.log("Acount toggled", this.state.accountLinkClicked);
+    this.setState({ accountLinkClicked: !this.state.accountLinkClicked });
+  };
 
   getCurrentlyLoggedInUser = () => {
     this.authService
@@ -69,7 +74,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Nav logout={this.logoutCall} user={this.state.currentlyLoggedIn} />
+          <Nav
+            logout={this.logoutCall}
+            user={this.state.currentlyLoggedIn}
+            toggleAccountView={this.toggleUserAccountView}
+          />
           <Switch>
             <Route
               exact
@@ -78,7 +87,11 @@ export default class App extends Component {
                 !this.state.currentlyLoggedIn ? (
                   <Signup {...props} getUser={this.getCurrentlyLoggedInUser} />
                 ) : (
-                  <DashBoard />
+                  <DashBoard
+                    allProjects={this.state.allProjects}
+                    accountToggleState={this.state.accountLinkClicked}
+                    currentlyLoggedIn={this.state.currentlyLoggedIn}
+                  />
                 )
               }
             />

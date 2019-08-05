@@ -8,11 +8,15 @@
 
 .dashboard-components {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1.5fr 1fr 2fr;
-  grid-gap: 10px;
+  grid-gap: 20px;
   grid-template-areas:
-    "task task . ."
-    "task task . .";
+    "task   project"
+    "task   project";
+  padding: 20px;
+}
+
+.project-details-view {
   padding: 20px;
 }
