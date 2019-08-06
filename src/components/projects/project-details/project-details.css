@@ -22,3 +22,11 @@
   cursor: pointer;
   color: #39b6ff;
 }
+
+.exit-details {
+  align-self: right !important;
+}
+
+.edit-modal {
+  position: absolute;
+}

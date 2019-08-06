@@ -1,8 +1,29 @@
 .project-single-row {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 10px;
   border-bottom: 1px solid #7882a2;
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+
+button.select-project {
+  cursor: pointer;
+  color: #7882a2;
+}
+
+.project-single-row i {
+  font-size: 20px;
+  color: #39b6ff;
+  transition: all 0.3s ease-in-out;
+}
+.project-single-row i:hover {
+  font-size: 20px;
+  cursor: pointer;
+  color: #ce4ad8;
 }
