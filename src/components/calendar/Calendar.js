@@ -14,7 +14,7 @@ class Calendar extends Component {
   render() {
     return (
       <FullCalendar
-        defaultView="dayGridMonth"
+        defaultView="dayGridWeek"
         plugins={[dayGridPlugin, interactionPlugin]}
         events={this.props.events}
         dateClick={this.props.dateClick}

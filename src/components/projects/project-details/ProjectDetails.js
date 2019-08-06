@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import M from "materialize-css";
+
 import EditProjectModal from "../EditProject/EditProjectModal";
 import "./project-details.css";
 
@@ -8,12 +11,14 @@ export default class ProjectDetails extends Component {
     this.state = {};
   }
   componentDidMount = () => {
-    window.modalInit();
+    var getModal = document.querySelectorAll(".modal");
+    var instances = M.Modal.init(getModal, {});
+    // window.modalInit();
   };
 
   getProjectInfo = () => {
     const allProjects = this.props.allProjects;
-    const projectId = this.props.projectDetailID;
+    const projectId = this.props.match.params.id;
     const singleProject = allProjects.filter(project => {
       return project._id === projectId;
     });
@@ -35,9 +40,9 @@ export default class ProjectDetails extends Component {
             <a data-target="edit-project-modal" className="modal-trigger">
               <i className="fas fa-edit" />
             </a>
-            <button onClick={this.props.toggleProjectView}>
+            <Link to="/">
               <i className="fas fa-times-circle" />
-            </button>
+            </Link>
           </div>
           <EditProjectModal singleProject={singleProject} />
         </div>

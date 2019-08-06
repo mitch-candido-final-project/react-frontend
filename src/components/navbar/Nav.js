@@ -1,41 +1,97 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import M from "materialize-css";
 import "./nav.css";
-export default function Nav(props) {
-  //   console.log(props.getUser());
 
-  return (
-    <div className="nav">
-      <h3>PROLO</h3>
-      {!props.user ? (
-        <div className="logged-out-nav">
-          <a data-target="modal1" className="btn modal-trigger">
-            About
-          </a>
-          <a data-target="modal1" className="btn modal-trigger">
-            Login
-          </a>
-        </div>
-      ) : (
-        <div className="loged-in-nav">
-          <div className="left-side">
-            <Link to={"/"} className="btn">
+export default class Nav extends Component {
+  componentDidMount() {
+    var elemsRight = document.querySelectorAll(".sidenav.sidenavRight");
+    var elemsLeft = document.querySelectorAll(".sidenav.sidenavLeft");
+    var instances1 = M.Sidenav.init(elemsRight, { edge: "right" });
+    var instances2 = M.Sidenav.init(elemsLeft, { edge: "left" });
+  }
+  render() {
+    return (
+      <div>
+        <nav>
+          <div className="nav-wrapper">
+            <a href="#!" className="brand-logo">
+              PROLO
+            </a>
+            <a
+              href="#"
+              data-target="slide-out"
+              className="left sidenav-trigger"
+            >
+              <i className="material-icons">details</i>
+            </a>
+            <a
+              href="#"
+              data-target="mobile-demo"
+              className="right sidenav-trigger"
+            >
+              <i className="material-icons">menu</i>
+            </a>
+            {this.props.user ? (
+              <ul className="right hide-on-med-and-down">
+                <li>
+                  <Link to="/" className="btn">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <a className="btn" onClick={this.props.logout}>
+                    News Feed
+                  </a>
+                </li>
+                <li>
+                  <Link to="/account" className="btn">
+                    Account
+                  </Link>
+                </li>
+                <li>
+                  <a className="btn" onClick={this.props.logout}>
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            ) : (
+              <ul className="right hide-on-med-and-down">
+                <li>
+                  <a data-target="modal1" className="btn modal-trigger">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a data-target="modal1" className="btn modal-trigger">
+                    Login
+                  </a>
+                </li>
+              </ul>
+            )}
+          </div>
+        </nav>
+        <ul className="sidenav sidenavRight" id="mobile-demo">
+          <li>
+            <Link to="/" className="btn">
               Dashboard
             </Link>
-            <a className="btn" onClick={props.logout}>
-              News Feed
-            </a>
-          </div>
-          <div className="right-side">
-            <a className="btn" onClick={props.toggleAccountView}>
+          </li>
+          <li>
+            <Link to="/account" className="btn">
               Account
-            </a>
-            <a className="btn" onClick={props.logout}>
+            </Link>
+          </li>
+          <li>
+            <a className="btn" onClick={this.props.logout}>
               Logout
             </a>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+          </li>
+          <li>
+            <a href="mobile.html">Mobile</a>
+          </li>
+        </ul>
+      </div>
+    );
+  }
 }

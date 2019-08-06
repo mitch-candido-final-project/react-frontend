@@ -11,19 +11,13 @@ class ProjectService {
   }
 
   addProject = info => {
-    return this.service.post("/new-project", info, { withCredentials: true });
+    return this.service.post("/new-project", info, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      withCredentials: true
+    });
   };
-
-  // {
-  //   name: info.name,
-  //   description: info.description,
-  //   startDate: info.startDate,
-  //   dueDate: info.dueDate,
-  //   timeSpent: 0,
-  //   complete: false,
-  //   isPublic: info.isPublic,
-  //   image: info.image
-  // }
 
   projectDetails = id => {
     return this.service.get("/details/" + id).then(response => response.data);
@@ -34,7 +28,6 @@ class ProjectService {
   };
 
   updateProject = (id, data) => {
-    console.log("this is the data from the project services", data.name);
     return this.service
       .post("/update/" + id, data, { withCredentials: true })
       .then(response => response.data);

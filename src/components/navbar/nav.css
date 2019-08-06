@@ -1,7 +1,7 @@
 .nav {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-column-gap: 5px;
+  /* display: grid;
+  grid-template-columns: 1fr 4fr; */
+  /* grid-column-gap: 5px; */
 }
 
 .nav h3 {
