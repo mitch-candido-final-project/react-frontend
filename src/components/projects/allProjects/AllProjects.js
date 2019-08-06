@@ -8,7 +8,9 @@ export default class AllProjects extends Component {
       this.props.toggleProjectView();
       this.props.saveProjectIdToState(id);
     };
-
+    const setCurrentProj = id => {
+      this.props.setCurrProj(id);
+    };
     return this.props.allProjects.map(eachProject => {
       return (
         <div key={eachProject._id} className="project-single-row">
@@ -22,6 +24,9 @@ export default class AllProjects extends Component {
           <span>{eachProject.startDate}</span>
           <span>{eachProject.dueDate}</span>
           <span>{eachProject.isPublic}</span>
+          <button onClick={() => setCurrentProj(eachProject._id)}>
+            select this project
+          </button>
           <button
             // to={`/details/${eachProject._id}`}
             onClick={() => onclickFunctions(eachProject._id)}
@@ -32,6 +37,7 @@ export default class AllProjects extends Component {
       );
     });
   };
+
   render() {
     return <div>{this.getAllProjects()}</div>;
   }
