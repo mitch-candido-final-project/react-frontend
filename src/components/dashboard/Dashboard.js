@@ -18,7 +18,7 @@ export default class Dashboard extends Component {
       projectDetailID: "",
       projects: [],
       currentProject: this.props.allProjects[0],
-      currenttasks: []
+      currentTasks: []
     };
   }
 
@@ -37,12 +37,14 @@ export default class Dashboard extends Component {
   };
 
   handleDateClick = arg => {
-    console.log("this is the testb yo", arg);
-    let newCurrTasks = this.state.currentProject.tasks.find(
-      eachTask => eachTask.date === arg.dateStr
-    );
-    console.log(newCurrTasks);
-    this.setState({ currenttasks: newCurrTasks });
+    console.log(this.state.currentProject.tasks);
+    let newCurrTasks = this.state.currentProject.tasks.filter(eachTask => {
+      if (eachTask.date === arg.dateStr) {
+        return eachTask;
+      }
+    });
+    console.log("current task: ", newCurrTasks);
+    this.setState({ currentTasks: newCurrTasks });
   };
   componentDidMount() {
     window.modalInit();
@@ -54,7 +56,7 @@ export default class Dashboard extends Component {
         <Sidebar />
         {!this.state.projectLinkClicked && !this.props.accountToggleState && (
           <div className="dashboard-components">
-            <TaskPanel />
+            <TaskPanel tasks={this.state.currentTasks} />
             <ProjectPanel
               allProjects={this.props.allProjects}
               toggleProjectView={this.toggleProjectDetailView}
@@ -78,12 +80,14 @@ export default class Dashboard extends Component {
           </div>
         )}
         <div className="calendar">
-          <Calendar
-            events={
-              this.state.currentProject && this.state.currentProject.tasks
-            }
-            dateClick={this.handleDateClick}
-          />
+          {this.state.currentProject && (
+            <Calendar
+              events={
+                this.state.currentProject && this.state.currentProject.tasks
+              }
+              dateClick={this.handleDateClick}
+            />
+          )}
         </div>
       </div>
     );
