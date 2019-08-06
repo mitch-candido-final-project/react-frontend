@@ -8,13 +8,17 @@ import TaskPanel from "../taskPanel/TaskPanel";
 import ProjectPanel from "../projects/project-panel/ProjectPanel";
 import ProjectDetails from "../projects/project-details/ProjectDetails";
 import UserAccount from "../user-account/UserAccount";
+import Calendar from "../calendar/Calendar.js";
 
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       projectLinkClicked: false,
-      projectDetailID: ""
+      projectDetailID: "",
+      projects: [],
+      currentProject: this.props.allProjects[0],
+      currenttasks: []
     };
   }
 
@@ -27,6 +31,19 @@ export default class Dashboard extends Component {
     this.setState({ projectDetailID: id });
   };
 
+  setCurrentProject = id => {
+    let newCurrPrj = this.props.allProjects.find(eachPrj => eachPrj._id === id);
+    this.setState({ currentProject: newCurrPrj });
+  };
+
+  handleDateClick = arg => {
+    console.log("this is the testb yo", arg);
+    let newCurrTasks = this.state.currentProject.tasks.find(
+      eachTask => eachTask.date === arg.dateStr
+    );
+    console.log(newCurrTasks);
+    this.setState({ currenttasks: newCurrTasks });
+  };
   componentDidMount() {
     window.modalInit();
   }
@@ -42,6 +59,7 @@ export default class Dashboard extends Component {
               allProjects={this.props.allProjects}
               toggleProjectView={this.toggleProjectDetailView}
               saveProjectIdToState={this.getTheProjectDetail}
+              setCurrProj={this.setCurrentProject}
             />
           </div>
         )}
@@ -59,6 +77,14 @@ export default class Dashboard extends Component {
             <UserAccount currentlyLoggedIn={this.props.currentlyLoggedIn} />
           </div>
         )}
+        <div className="calendar">
+          <Calendar
+            events={
+              this.state.currentProject && this.state.currentProject.tasks
+            }
+            dateClick={this.handleDateClick}
+          />
+        </div>
       </div>
     );
   }

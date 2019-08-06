@@ -19,6 +19,7 @@ export default class ProjectPanel extends Component {
           allProjects={this.props.allProjects}
           toggleProjectView={this.props.toggleProjectView}
           saveProjectIdToState={this.props.saveProjectIdToState}
+          setCurrProj={this.props.setCurrProj}
         />
       </div>
     );
