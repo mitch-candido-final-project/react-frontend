@@ -1,16 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
+import EditProjectModal from "../EditProject/EditProjectModal";
 import "./project-details.css";
 
-function ProjectDetails(props) {
-  const allProjects = props.allProjects;
-  const projectId = props.projectDetailID;
+export default class ProjectDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount = () => {
+    window.modalInit();
+  };
 
-  const getProjectInfo = () => {
+  getProjectInfo = () => {
+    const allProjects = this.props.allProjects;
+    const projectId = this.props.projectDetailID;
     const singleProject = allProjects.filter(project => {
       return project._id === projectId;
     });
-    console.log("this got the project", singleProject);
-
+    console.log("this is t prove to candido that its an array", singleProject);
     return singleProject.map(singleProject => {
       return (
         <div key={singleProject._id} className="project-details-content">
@@ -25,28 +32,20 @@ function ProjectDetails(props) {
             {/* still have to do the images */}
           </div>
           <div className="exit-details">
-            <button onClick={props.toggleProjectView}>
+            <a data-target="edit-project-modal" className="modal-trigger">
+              <i className="fas fa-edit" />
+            </a>
+            <button onClick={this.props.toggleProjectView}>
               <i className="fas fa-times-circle" />
             </button>
           </div>
+          <EditProjectModal singleProject={singleProject} />
         </div>
       );
     });
-
-    // if (singleProject._id) {
-    //   return (
-    //     <div>
-    //       <p>{singleProject.name}</p>
-    //       <h1>a </h1>
-    //       <p>bll</p>
-    //     </div>
-    //   );
-    // } else {
-    //   return <h2>loading..</h2>;
-    // }
   };
 
-  return <div className="project-details">{getProjectInfo()}</div>;
+  render() {
+    return <div className="project-details">{this.getProjectInfo()}</div>;
+  }
 }
-
-export default ProjectDetails;

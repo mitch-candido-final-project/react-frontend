@@ -1,28 +1,32 @@
 import React, { Component } from "react";
-import ProjectService from "../services/ProjectService";
-
-class NewProject extends Component {
+import ProjectService from "../../services/ProjectService";
+import "./edit-project-modal.css";
+class EditProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      description: "",
-      startDate: "",
-      dueDate: "",
-      isPublic: false,
-      image: ""
+      name: this.props.singleProject.name,
+      description: this.props.singleProject.description,
+      startDate: this.props.singleProject.startDate,
+      dueDate: this.props.singleProject.dueDate,
+      isPublic: this.props.singleProject.isPublic,
+      image: this.props.singleProject.image
     };
     this.service = new ProjectService();
   }
 
   handleFormSubmit = event => {
+    console.log(
+      "this is the id from the edit modal",
+      this.props.singleProject._id
+    );
     event.preventDefault();
-    const data = new FormData();
-    for (let key in this.state) {
-      data.append(key, this.state[key]);
-    }
+    // const data = new FormData();
+    // for (let key in this.state) {
+    //   data.append(key, this.state[key]);
+    // }
     this.service
-      .addProject(data)
+      .updateProject(this.props.singleProject._id, this.state)
       .then(() => {
         this.setState({
           name: "",
@@ -34,6 +38,7 @@ class NewProject extends Component {
         });
       })
       .catch(error => console.log(error));
+    // console.log("this is the data from the form submit", data);
   };
 
   handleChange = event => {
@@ -48,11 +53,28 @@ class NewProject extends Component {
     this.setState({ [event.target.name]: event.target.files[0] });
   };
 
-  render() {
+  deleteProject = () => {
+    this.service
+      .deleteProject(this.props.singleProject._id)
+      .then(() => {
+        console.log("worked");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  showProjectInfo = () => {
     return (
-      <div id="add-project-modal" className="modal add-project">
-        <form onSubmit={this.handleFormSubmit}>
-          <div className="modal-content">
+      <div id="edit-project-modal" className="modal add-project">
+        <div className="modal-content">
+          <div className="edit-header">
+            <h5>Edit Project</h5>
+            <button onClick={this.deleteProject}>
+              <span>Delete Project</span>
+              <i className="fas fa-minus-circle" />
+            </button>
+          </div>
+          <form onSubmit={this.handleFormSubmit}>
             <label>Name:</label>
             <input
               type="text"
@@ -96,16 +118,20 @@ class NewProject extends Component {
               onChange={e => this.handleChangeFile(e)}
             />
             <input type="submit" value="Submit" />
-          </div>
-          <div className="modal-footer">
-            <a href="#!" className="modal-close waves-effect waves-green">
-              close
-            </a>
-          </div>
-        </form>
+          </form>
+        </div>
+        <div className="modal-footer">
+          <a href="#!" className="modal-close waves-effect waves-green">
+            close
+          </a>
+        </div>
       </div>
     );
+  };
+
+  render() {
+    return <div className="edit-modal">{this.showProjectInfo()}</div>;
   }
 }
 
-export default NewProject;
+export default EditProject;

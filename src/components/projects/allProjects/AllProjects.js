@@ -13,6 +13,7 @@ export default class AllProjects extends Component {
       return (
         <div key={eachProject._id} className="project-single-row">
           <button
+            className="select-project"
             // to={`/details/${eachProject._id}`}
             onClick={() => onclickFunctions(eachProject._id)}
           >
@@ -21,6 +22,12 @@ export default class AllProjects extends Component {
           <span>{eachProject.startDate}</span>
           <span>{eachProject.dueDate}</span>
           <span>{eachProject.isPublic}</span>
+          <button
+            // to={`/details/${eachProject._id}`}
+            onClick={() => onclickFunctions(eachProject._id)}
+          >
+            <i className="fas fa-angle-double-right" />
+          </button>
         </div>
       );
     });

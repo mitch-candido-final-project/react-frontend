@@ -32,6 +32,18 @@ class ProjectService {
   getAllProjects = () => {
     return this.service.get("/all-projects/").then(response => response.data);
   };
+
+  updateProject = (id, data) => {
+    console.log("this is the data from the project services", data.name);
+    return this.service
+      .post("/update/" + id, data, { withCredentials: true })
+      .then(response => response.data);
+  };
+
+  deleteProject = id => {
+    console.log("this project was deleted");
+    return this.service.delete(id).then(response => response.data);
+  };
 }
 
 export default ProjectService;

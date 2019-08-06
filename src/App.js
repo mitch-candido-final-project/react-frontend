@@ -95,14 +95,6 @@ export default class App extends Component {
                 )
               }
             />
-            <Route exact path="/new-project" component={NewProject} />
-            <Route
-              exact
-              path="/all-projects"
-              render={props => (
-                <AllProjects {...props} allProjects={this.state.allProjects} />
-              )}
-            />
           </Switch>
           <Route
             path="/"
