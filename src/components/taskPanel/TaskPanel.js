@@ -22,6 +22,8 @@ export default class TaskPannel extends Component {
     });
   };
   render() {
-    return <div className="task-container">{this.displayTasks()}</div>;
+    return (
+      <div className="task-container col s12 m6">{this.displayTasks()}</div>
+    );
   }
 }

@@ -2,19 +2,19 @@
   min-height: 100vh;
   background-color: #181c28;
   color: #7882a2;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
+  /* display: grid;
+  grid-template-columns: 1fr 4fr; */
 }
 
 .dashboard-components {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1.5fr 1fr 2fr;
   grid-gap: 20px;
   grid-template-areas:
     "task   project"
     "task   project";
-  padding: 20px;
+  padding: 20px; */
 }
 
 .project-details-view {

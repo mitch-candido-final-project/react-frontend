@@ -16,17 +16,14 @@ class EditProject extends Component {
   }
 
   handleFormSubmit = event => {
-    console.log(
-      "this is the id from the edit modal",
-      this.props.singleProject._id
-    );
     event.preventDefault();
-    // const data = new FormData();
-    // for (let key in this.state) {
-    //   data.append(key, this.state[key]);
-    // }
+    const data = new FormData();
+    for (let key in this.state) {
+      data.append(key, this.state[key]);
+    }
+
     this.service
-      .updateProject(this.props.singleProject._id, this.state)
+      .updateProject(this.props.singleProject._id, data)
       .then(() => {
         this.setState({
           name: "",
