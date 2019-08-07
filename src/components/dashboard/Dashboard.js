@@ -45,11 +45,14 @@ export default class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="dashboard-components row">
-          <TaskPanel tasks={this.state.currentTasks} />
-          <ProjectPanel
-            allProjects={this.props.allProjects}
-            setCurrProj={this.setCurrentProject}
-          />
+          <div className="top-dash-contents">
+            <TaskPanel tasks={this.state.currentTasks} />
+            <ProjectPanel
+              {...this.props}
+              allProjects={this.props.allProjects}
+              setCurrProj={this.setCurrentProject}
+            />
+          </div>
           <div className="calendar col s12">
             {this.state.currentProject && (
               <Calendar

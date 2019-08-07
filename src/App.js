@@ -74,6 +74,7 @@ export default class App extends Component {
   logoutCall = () => {
     this.authService.logout().then(() => {
       console.log("call from nav logout");
+      //
       this.setState({ currentlyLoggedIn: null });
     });
   };
@@ -83,9 +84,12 @@ export default class App extends Component {
       <div className="App">
         <header className="App-header">
           <Nav logout={this.logoutCall} user={this.state.currentlyLoggedIn} />
-          {/* <button data-target="slide-out" className="sidenav-trigger btn">
-            test
-          </button> */}
+          <button
+            data-target="slide-out"
+            className="sidenav-trigger btn side-nav-btn"
+          >
+            <i class="material-icons">keyboard_arrow_right</i>
+          </button>
           {this.state.currentlyLoggedIn && <Sidebar />}
           <Switch>
             <Route
@@ -96,6 +100,7 @@ export default class App extends Component {
                   <Signup {...props} getUser={this.getCurrentlyLoggedInUser} />
                 ) : (
                   <DashBoard
+                    {...props}
                     allProjects={this.state.allProjects}
                     accountToggleState={this.state.accountLinkClicked}
                     currentlyLoggedIn={this.state.currentlyLoggedIn}
