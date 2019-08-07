@@ -10,12 +10,13 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div>
-        <button
+        {/* <button
+          className="side-nav-open"
           data-target="slide-out"
           className="sidenav-trigger btn hide-on-med-and-down"
         >
           test
-        </button>
+        </button> */}
         <div className="sidebar sidenav sidenavLeft" id="slide-out">
           <Status />
           <div className="social-content">

@@ -12,9 +12,9 @@ export default class Nav extends Component {
   }
   render() {
     return (
-      <div>
-        <nav>
-          <div className="nav-wrapper">
+      <div className="nav-container">
+        <nav className="nav-custom">
+          <div className="nav-wrapper nav-custom-wrapper">
             <a href="#!" className="brand-logo">
               PROLO
             </a>
@@ -35,22 +35,22 @@ export default class Nav extends Component {
             {this.props.user ? (
               <ul className="right hide-on-med-and-down">
                 <li>
-                  <Link to="/" className="btn">
+                  <Link to="/" className="nav-links link-1">
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <a className="btn" onClick={this.props.logout}>
+                  <a className="nav-links link-2" onClick={this.props.logout}>
                     News Feed
                   </a>
                 </li>
                 <li>
-                  <Link to="/account" className="btn">
+                  <Link to="/account" className="nav-links link-3">
                     Account
                   </Link>
                 </li>
                 <li>
-                  <a className="btn" onClick={this.props.logout}>
+                  <a className="nav-links link-4" onClick={this.props.logout}>
                     Logout
                   </a>
                 </li>
@@ -58,12 +58,12 @@ export default class Nav extends Component {
             ) : (
               <ul className="right hide-on-med-and-down">
                 <li>
-                  <a data-target="modal1" className="btn modal-trigger">
+                  <a data-target="modal1" className="nav-links modal-trigger">
                     About
                   </a>
                 </li>
                 <li>
-                  <a data-target="modal1" className="btn modal-trigger">
+                  <a data-target="modal1" className="nav-links modal-trigger">
                     Login
                   </a>
                 </li>

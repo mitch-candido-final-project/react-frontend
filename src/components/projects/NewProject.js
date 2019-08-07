@@ -24,6 +24,7 @@ class NewProject extends Component {
     this.service
       .addProject(data)
       .then(() => {
+        this.props.history.push("/");
         this.setState({
           name: "",
           description: "",

@@ -5,6 +5,7 @@
   min-height: 500px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .exit-details button {
@@ -29,4 +30,8 @@
 
 .edit-modal {
   position: absolute;
+}
+
+.project-details {
+  padding: 20px;
 }

@@ -2,8 +2,9 @@
   margin-top: 5px;
   display: grid;
   grid-template-rows: 1fr 3fr;
-  grid-row-gap: 5px;
+  grid-row-gap: 2px;
   /* padding: 20px; */
+  background-color: #66c8d4;
 }
 
 .status-container {
@@ -21,9 +22,9 @@ hr {
   background-color: #171c28;
   border: none;
 }
-.dropdown-btn {
-  width: 100%;
-  background-color: #3fb485 !important;
+.btn {
+  /* width: 100%; */
+  background-color: #66c8d4 !important;
   border-radius: 5px;
   color: #fff;
 }
@@ -74,7 +75,7 @@ hr {
   justify-content: flex-start;
   align-items: center;
   box-shadow: 2px 0px 10px 0 rgba(0, 0, 0, 0.14);
-  border-radius: 0 5px 5px 0;
+  color: #fff;
 }
 
 .status {
@@ -84,10 +85,14 @@ hr {
   align-items: center;
   justify-content: center;
   box-shadow: 2px 0px 10px 0 rgba(0, 0, 0, 0.14);
-  border-radius: 0 5px 5px 0;
+  color: #fff;
 }
 
 .status p:nth-child(2) {
   margin-bottom: 5px;
   align-self: left;
+}
+
+.side-nav-open {
+  position: absolute !important;
 }
